@@ -117,6 +117,18 @@ const generateLink = (mode) => {
     });
 };
 
+const generateShortLink = () => {
+    const data = editor.getValue();
+    compress(data, (base64, err) => {
+        if (err) {
+            alert('Failed to compress data: ' + err);
+            return;
+        }
+        const longUrl = buildUrl(base64, 'url');
+        shortenWithIsGd(longUrl);
+    });
+};
+
 // Open the "Copy" bar and select the content
 const showCopyBar = (dataToCopy) => {
     byId('copy').classList.remove('hidden');
